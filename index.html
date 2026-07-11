@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>paulo sinteko | Renove seu Piso</title>
+    <style>
+        /* Estilos Gerais e Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Menu / Link Fixado no Topo (Sticky Header) */
+        header {
+            position: -webkit-sticky; /* Suporte para Safari */
+            position: sticky;
+            top: 0;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: default;
+        }
+
+        .logo img {
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        #logo-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #d35400; /* Tom amadeirado/moderno */
+            outline: none;
+        }
+
+        @media (max-width: 600px) {
+            .logo img { width: 40px; height: 40px; }
+            #logo-text { font-size: 16px; }
+        }
+
+        /* O Link Fixado em Destaque */
+        .btn-fixo-topo {
+            background-color: #d35400;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .btn-fixo-topo:hover {
+            background-color: #e67e22;
+        }
+
+        /* Seção Principal (Hero) */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?ixlib=rb-4.0.3') no-repeat center center/cover;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 25px;
+            max-width: 600px;
+        }
+
+        /* Seção de Serviços */
+        .servicos {
+            padding: 60px 5%;
+            text-align: center;
+        }
+
+        .servicos h2 {
+            margin-bottom: 40px;
+            color: #2c3e50;
+        }
+
+        .grid-servicos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .galeria-exemplos {
+            padding: 60px 5%;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .galeria-exemplos h2 {
+            margin-bottom: 40px;
+            color: #2c3e50;
+        }
+
+        .galeria-lista {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .galeria-item {
+            width: 100%;
+            max-width: 360px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+            overflow: hidden;
+            text-align: left;
+        }
+
+        .galeria-item img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .galeria-item .descricao {
+            padding: 18px 20px 22px;
+        }
+
+        .galeria-item .descricao h3 {
+            margin-bottom: 12px;
+            color: #d35400;
+        }
+
+        .galeria-item .descricao p {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .galeria-item input[type="file"] {
+            display: none;
+        }
+
+        .galeria-item .editar-aviso {
+            display: block;
+            margin-top: 12px;
+            font-size: 13px;
+            color: #999;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 30px; }
+            header { flex-direction: column; gap: 10px; text-align: center; }
+            .galeria-item { max-width: 100%; }
+        }
+
+        .card h3 {
+            color: #d35400;
+            margin-bottom: 15px;
+        }
+
+        /* Link Fixo Flutuante (WhatsApp) */
+        .btn-flutuante-wa {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-flutuante-wa:hover {
+            transform: scale(1.05);
+            background-color: #128c7e;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #2c3e50;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 30px; }
+            header { flex-direction: column; gap: 10px; text-align: center; }
+        }
+
+        /* Galeria fixa no desktop (mantém scroll interno) */
+        @media (min-width: 900px) {
+            body { padding-right: 420px; }
+            .galeria-exemplos {
+                position: fixed;
+                top: 80px; /* abaixo do header */
+                right: 20px;
+                width: 360px;
+                max-width: 360px;
+                height: calc(100vh - 100px);
+                padding: 20px;
+                overflow-y: auto;
+                background: transparent;
+                margin: 0;
+                text-align: left;
+            }
+
+            .galeria-exemplos h2 { text-align: left; margin-bottom: 16px; }
+
+            .galeria-lista { align-items: stretch; }
+
+            .galeria-item { margin-bottom: 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER FIXO (Acompanha a rolagem da página) -->
+    <header>
+        <div class="logo" id="logo">
+            <img id="logo-img" src="img/logo.png.png" alt="Logo">
+            <span id="logo-text" contenteditable="true" aria-label="Editar nome da empresa" title="Clique para editar o nome">Sinteco Profissional</span>
+            <input type="file" id="logo-file" accept="image/*" style="display:none" aria-hidden="true">
+        </div>
+        <!-- Link fixado no topo para conversão imediata -->
+        <a href="#orcamento" class="btn-fixo-topo">Solicitar Orçamento</a>
+    </header>
+
+    <!-- SEÇÃO PRINCIPAL -->
+    <section class="hero">
+        <h1>Seu piso de madeira novo de novo</h1>
+        <p>Aplicação de sinteco, raspagem de tacos e assoalhos com acabamento impecável e alta durabilidade.</p>
+    </section>
+
+    <!-- SEÇÃO DE SERVIÇOS -->
+    <section id="servicos" class="servicos">
+        <h2>Nossos Serviços</h2>
+        <div class="grid-servicos">
+            <div class="card">
+                <h3>Raspagem de Tacos</h3>
+                <p>Remoção de vernizes antigos, riscos e imperfeições, preparando a madeira para a proteção.</p>
+            </div>
+            <div class="card">
+                <h3>Aplicação de Sinteco</h3>
+                <p>Proteção clássica com opções de acabamento brilhante, semibrilho ou fosco de alta resistência.</p>
+            </div>
+            <div class="card">
+                <h3>Calafetação</h3>
+                <p>Preenchimento de juntas e frestas entre as madeiras para um visual totalmente uniforme.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERIA VERTICAL EDITÁVEL -->
+    <section class="galeria-exemplos" aria-label="Exemplos de pisos renovados">
+        <h2>Exemplos de Piso Renovado</h2>
+        <div class="galeria-lista">
+            <div class="galeria-item">
+                <img src="img/piso rasp.jpeg" alt="Piso renovado">
+                <input type="file" id="exemplo-file-1" accept="image/*" style="display:none" aria-hidden="true">
+                <div class="descricao">Piso de madeira em réguas longas,com lixamento e proteção em sinteco
+            </div>
+            <div class="galeria-item">
+                <img src="img/pisoesc.jpeg" alt="Piso renovado">
+                <input type="file" id="exemplo-file-2" accept="image/*" style="display:none" aria-hidden="true">
+                <div class="descricao">Piso de taco em espinha de peixe,lixado e com aplicação em verniz
+            </div>
+            <div class="galeria-item">
+                <img src="img/pisobrilhant.jpeg" alt="Piso renovado">
+                <input type="file" id="exemplo-file-3" accept="image/*" style="display:none" aria-hidden="true">
+                <div class="descricao">Piso de madeira evernizado e bem polido
+            
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LINK FIXO FLUTUANTE (Canto inferior direito) -->
+    <!-- Substitua o '5500000000000' pelo seu número real do WhatsApp com DDD -->
+    <a href="https://wa.me/5521986884281?text=Olá,%20gostaria%20de%20um%20orçamento%20de%20sinteco." class="btn-flutuante-wa" target="_blank">
+        💬 Chamar no WhatsApp
+    </a>
+
+    <!-- RODAPÉ -->
+    <footer id="orcamento">
+        <p>&copy; 2026 Sinteco Profissional - Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var logoImg = document.getElementById('logo-img');
+            var logoText = document.getElementById('logo-text');
+            var fileInput = document.getElementById('logo-file');
+
+            try {
+                var savedImage = localStorage.getItem('logo.png');
+                if (savedImage) logoImg.src = savedImage;
+                var savedText = localStorage.getItem('siteLogoText');
+                if (savedText) logoText.textContent = savedText;
+            } catch (e) { console.error(e); }
+
+
+
+            var saveTimeout;
+            function saveText() {
+                clearTimeout(saveTimeout);
+                saveTimeout = setTimeout(function() {
+                    try { localStorage.setItem('logo.png', logoText.textContent.trim()); } catch (err) { console.error(err); }
+                }, 500);
+            }
+
+            logoText.addEventListener('input', saveText);
+            logoText.addEventListener('blur', saveText);
+            logoText.addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); logoText.blur(); } });
+
+            var exemplos = [1, 2, 3];
+
+            exemplos.forEach(function(id) {
+                var img = document.getElementById('pisorasp.jpeg' + id);
+                var fileInputExemplo = document.getElementById('exemplo-file-' + id);
+                var titulo = document.getElementById('exemplo-titulo-' + id);
+                var texto = document.getElementById('exemplo-texto-' + id);
+
+                try {
+                    var savedImg = localStorage.getItem('exemploImagem' + id);
+                    if (savedImg) img.src = savedImg;
+                    var savedTitulo = localStorage.getItem('exemploTitulo' + id);
+                    if (savedTitulo) titulo.textContent = savedTitulo;
+                    var savedTexto = localStorage.getItem('exemploTexto' + id);
+                    if (savedTexto) texto.textContent = savedTexto;
+                } catch (e) { console.error(e); }
+
+
+
+                function saveExemploText() {
+                    try {
+                        localStorage.setItem('exemploTitulo' + id, titulo.textContent.trim());
+                        localStorage.setItem('exemploTexto' + id, texto.textContent.trim());
+                    } catch (err) { console.error(err); }
+                }
+
+                titulo.addEventListener('input', saveExemploText);
+                titulo.addEventListener('blur', saveExemploText);
+                texto.addEventListener('input', saveExemploText);
+                texto.addEventListener('blur', saveExemploText);
+
+                // Permitir clicar na imagem para abrir o seletor de arquivos
+                if (img && fileInputExemplo) {
+                    img.style.cursor = 'pointer';
+                    img.addEventListener('click', function() { fileInputExemplo.click(); });
+
+                    fileInputExemplo.addEventListener('change', function(e) {
+                        var file = e.target.files && e.target.files[0];
+                        if (!file) return;
+                        var reader = new FileReader();
+                        reader.onload = function(ev) {
+                            img.src = ev.target.result;
+                            try { localStorage.setItem('exemploImagem' + id, ev.target.result); } catch (err) { console.error(err); }
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                }
+            });
+
+            // Tornar o logo clicável para trocar a imagem
+            if (logoImg && fileInput) {
+                logoImg.style.cursor = 'pointer';
+                logoImg.addEventListener('click', function() { fileInput.click(); });
+
+                fileInput.addEventListener('change', function(e) {
+                    var file = e.target.files && e.target.files[0];
+                    if (!file) return;
+                    var reader = new FileReader();
+                    reader.onload = function(ev) {
+                        logoImg.src = ev.target.result;
+                        try { localStorage.setItem('siteLogoImage', ev.target.result); } catch (err) { console.error(err); }
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
